@@ -2,6 +2,9 @@
 
 import { useState, ChangeEvent, MouseEvent } from 'react';
 import { useLazyQuery, gql } from '@apollo/client';
+import { Input } from "@/components/ui/input";
+import {Search} from 'lucide-react';
+
 
 const SEARCH_CHARACTERS = gql`
   query SearchCharacters($name: String!) {
@@ -40,13 +43,17 @@ export default function Autocomplete() {
 
   return (
     <div className="relative w-full max-w-md mx-auto mt-8">
-      <input
-        type="text"
-        value={inputValue}
-        onChange={handleInputChange}
-        placeholder="Search characters..."
-        className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-      />
+       <div className='relative flex flex-row items-center'>
+            <Search className='absolute left-2'/>
+            <Input
+                type="text"
+                value={inputValue}
+                onChange={handleInputChange}
+                placeholder="Search characters..."
+                className="w-full ps-10 px-4 py-2 h-12 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+        </div> 
+      
       { loading && <p>Loading...</p>}
       { isShowDropdown && data && (
         <ul className="absolute left-0 right-0 bg-white border border-gray-300 mt-1 max-h-48 overflow-y-auto shadow-lg">
